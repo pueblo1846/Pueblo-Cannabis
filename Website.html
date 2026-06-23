@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pueblo Cannabis Co.</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    :root{
+      --cream:#e7dcc8;
+      --sand:#d8c1a7;
+      --brown:#7a4b2b;
+      --dark:#2d241d;
+      --sage:#a7b08c;
+      --light:#f7f2ea;
+    }
+
+    body{
+      font-family: Georgia, serif;
+      background: var(--cream);
+      color: var(--dark);
+      scroll-behavior:smooth;
+    }
+
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
+
+    img{
+      width:100%;
+      display:block;
+      object-fit:cover;
+    }
+
+    /* NAV */
+
+    nav{
+      width:100%;
+      background:#efe6d7;
+      padding:22px 8%;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      position:sticky;
+      top:0;
+      z-index:900;
+      border-bottom:1px solid rgba(0,0,0,.08);
+    }
+
+    .logo{
+      text-align:center;
+    }
+
+    .logo h1{
+      font-size:2rem;
+      letter-spacing:3px;
+      color:var(--brown);
+    }
+
+    .logo span{
+      font-size:.8rem;
+      letter-spacing:2px;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:30px;
+      align-items:center;
+      font-size:.95rem;
+      text-transform:uppercase;
+    }
+
+    .nav-links a{
+      transition:.3s;
+    }
+
+    .nav-links a:hover{
+      color:var(--brown);
+    }
+
+    .visit-btn{
+      background:var(--brown);
+      color:white;
+      padding:10px 18px;
+      border-radius:3px;
+    }
+
+    /* HERO */
+
+    .hero{
+      min-height:100vh;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:40px;
+      padding:60px 8%;
+      align-items:center;
+      background:
+      linear-gradient(rgba(231,220,200,.95), rgba(231,220,200,.95)),
+      url("https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=1600&auto=format&fit=crop");
+      background-size:cover;
+    }
+
+    .hero-text h2{
+      font-size:4rem;
+      line-height:1.05;
+      margin-bottom:25px;
+    }
+
+    .hero-text p{
+      font-size:1.1rem;
+      line-height:1.8;
+      max-width:550px;
+      margin-bottom:30px;
+    }
+
+    .btn{
+      display:inline-block;
+      padding:14px 28px;
+      background:var(--brown);
+      color:white;
+      border-radius:4px;
+      transition:.3s;
+    }
+
+    .btn:hover{
+      transform:translateY(-2px);
+      opacity:.9;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:20px;
+    }
+
+    .hero-grid img{
+      height:280px;
+      border-radius:10px;
+    }
+
+    /* SECTION */
+
+    section{
+      padding:90px 8%;
+    }
+
+    .section-title{
+      font-size:3rem;
+      margin-bottom:20px;
+      color:var(--brown);
+    }
+
+    .section-sub{
+      max-width:700px;
+      line-height:1.8;
+      margin-bottom:50px;
+    }
+
+    /* SHOP */
+
+    .shop-controls{
+      display:flex;
+      flex-wrap:wrap;
+      gap:15px;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:35px;
+    }
+
+    .shop-controls input,
+    .shop-controls select{
+      flex:1 1 220px;
+      min-width:220px;
+      padding:14px 18px;
+      border:1px solid rgba(45,36,29,.18);
+      border-radius:10px;
+      font-size:1rem;
+      background:#fff;
+      color:var(--dark);
+    }
+
+    .shop-controls select{
+      max-width:220px;
+    }
+
+    .filter-buttons{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:flex-start;
+      flex:1 1 320px;
+    }
+
+    .filter-btn{
+      border:1px solid rgba(45,36,29,.18);
+      background:#fff;
+      color:var(--dark);
+      padding:10px 16px;
+      border-radius:999px;
+      cursor:pointer;
+      transition:.25s;
+      font-size:.9rem;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover{
+      background:var(--brown);
+      color:#fff;
+      border-color:var(--brown);
+    }
+
+    .products{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:30px;
+    }
+
+    .card{
+      background:var(--light);
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow:0 10px 30px rgba(0,0,0,.05);
+      transition:.3s;
+    }
+
+    .card:hover{
+      transform:translateY(-8px);
+    }
+
+    .card img{
+      height:260px;
+    }
+
+    .card-content{
+      padding:25px;
+    }
+
+    .card-content h3{
+      margin-bottom:12px;
+      font-size:1.5rem;
+    }
+
+    .tag{
+      display:inline-block;
+      background:var(--sage);
+      color:white;
+      padding:6px 12px;
+      margin-top:12px;
+      border-radius:20px;
+      font-size:.8rem;
+    }
+
+    .stock-label{
+      display:inline-block;
+      margin-top:10px;
+      background:rgba(122,75,43,.12);
+      color:var(--brown);
+      padding:6px 10px;
+      border-radius:12px;
+      font-size:.85rem;
+      font-weight:600;
+    }
+
+    /* GALLERY */
+
+    .gallery-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:20px;
+    }
+
+    .gallery-grid figure{
+      position:relative;
+      overflow:hidden;
+      border-radius:12px;
+      min-height:360px;
+    }
+
+    .gallery-grid img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .gallery-grid figcaption{
+      position:absolute;
+      inset:auto 0 0 0;
+      background:rgba(45,36,29,.75);
+      color:#fff;
+      padding:16px 18px;
+      font-size:.95rem;
+      line-height:1.4;
+    }
+
+    .artist-highlight{
+      max-width:730px;
+      margin-bottom:30px;
+      line-height:1.85;
+    }
+
+    .artist-highlight strong{
+      color:var(--brown);
+    }
+
+    /* ABOUT */
+
+    .about{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:50px;
+      align-items:center;
+    }
+
+    .about img{
+      border-radius:12px;
+      height:500px;
+    }
+
+    .about-text p{
+      line-height:1.9;
+      margin-bottom:20px;
+    }
+
+    /* FOOTER */
+
+    footer{
+      background:#d7c1a5;
+      padding:60px 8%;
+    }
+
+    .footer-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:30px;
+    }
+
+    footer h4{
+      margin-bottom:20px;
+      color:var(--brown);
+    }
+
+    footer p, footer a{
+      line-height:2;
+    }
+
+    .socials{
+      display:flex;
+      gap:15px;
+      margin-top:15px;
+    }
+
+    .socials a{
+      width:42px;
+      height:42px;
+      background:var(--brown);
+      color:white;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      font-size:1rem;
+    }
+
+    /* AGE POPUP */
+
+    .age-popup{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.7);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:9999;
+    }
+
+    .popup-box{
+      width:90%;
+      max-width:450px;
+      background:#e4c39f;
+      padding:45px;
+      border-radius:14px;
+      text-align:center;
+      box-shadow:0 20px 40px rgba(0,0,0,.3);
+    }
+
+    .popup-box h2{
+      margin-bottom:15px;
+      color:var(--brown);
+      font-size:2rem;
+    }
+
+    .popup-box p{
+      line-height:1.7;
+      margin-bottom:25px;
+    }
+
+    .popup-buttons{
+      display:flex;
+      gap:15px;
+      justify-content:center;
+    }
+
+    .popup-buttons button{
+      border:none;
+      padding:12px 26px;
+      cursor:pointer;
+      border-radius:5px;
+      font-size:1rem;
+    }
+
+    .yes-btn{
+      background:var(--brown);
+      color:white;
+    }
+
+    .no-btn{
+      background:#eee;
+    }
+
+    /* RESPONSIVE */
+
+    @media(max-width:900px){
+
+      .hero{
+        grid-template-columns:1fr;
+      }
+
+      .about{
+        grid-template-columns:1fr;
+      }
+
+      .hero-text h2{
+        font-size:3rem;
+      }
+
+      nav{
+        flex-direction:column;
+        gap:20px;
+      }
+
+      .nav-links{
+        flex-wrap:wrap;
+        justify-content:center;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- AGE VERIFICATION -->
+
+  <div class="age-popup" id="agePopup">
+    <div class="popup-box">
+      <h2>Age Verification</h2>
+      <p>
+        You must be 21 years or older to enter Pueblo Cannabis Co.
+        Please verify your age before accessing the site.
+      </p>
+
+      <div class="popup-buttons">
+        <button class="yes-btn" onclick="enterSite()">Yes, I’m 21+</button>
+        <button class="no-btn" onclick="leaveSite()">No</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAV -->
+
+  <nav>
+    <div class="nav-links">
+      <a href="#shop">Shop</a>
+      <a href="#gallery">Gallery</a>
+    </div>
+
+    <div class="logo">
+      <h1>PUEBLO</h1>
+      <span>CANNABIS CO.</span>
+    </div>
+
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a class="visit-btn" href="#footer">Visit</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="hero-text">
+      <h2>
+        Cultivating Art & Wellness
+        in the Desert.
+      </h2>
+
+      <p>
+        Pueblo Cannabis Co. is a cannabis dispensary and local art gallery
+        created for the community. We bring together premium flower,
+        curated local artwork, wellness experiences, and culture under one roof.
+      </p>
+
+      <a href="#shop" class="btn">Shop Collection</a>
+    </div>
+
+    <div class="hero-grid">
+      <img src="https://images.unsplash.com/photo-1597266028999-5ee5dbb30b3c?q=80&w=1200&auto=format&fit=crop" alt="Cannabis buds close-up">
+      <img src="https://images.unsplash.com/photo-1545989253-02cc26577f88?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="Local artwork by Armando Lerma">
+    </div>
+
+  </section>
+
+  <!-- SHOP -->
+
+  <section id="shop">
+
+    <h2 class="section-title">Shop Inventory</h2>
+
+    <p class="section-sub">
+      Explore our full inventory of premium cannabis products, including flower, pre-rolls, cartridges, and curated craft blends.
+      This selection is designed for indica, sativa, and hybrid fans alike.
+    </p>
+
+    <div class="shop-controls">
+      <input id="productSearch" type="search" placeholder="Search products, strain names, or effects..." />
+      <select id="sortSelect">
+        <option value="default">Sort by: Featured</option>
+        <option value="name">Name</option>
+        <option value="type">Type</option>
+      </select>
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="indica">Indica</button>
+        <button class="filter-btn" data-filter="sativa">Sativa</button>
+        <button class="filter-btn" data-filter="hybrid">Hybrid</button>
+      </div>
+    </div>
+
+    <div class="products">
+
+      <div class="card" data-type="indica" data-order="1" data-stock="in-stock">
+        <img src="https://images.unsplash.com/photo-1558010089-ff6fd29ea39a?q=80&w=1200&auto=format&fit=crop" alt="Desert Kush cannabis flower on a clear bag">
+        <div class="card-content">
+          <h3>Desert Kush</h3>
+          <p>Bold indica with earthy citrus notes for a slow sunset unwind.</p>
+          <span class="tag">Indica</span>
+          <span class="stock-label">In Stock</span>
+        </div>
+      </div>
+
+      <div class="card" data-type="sativa" data-order="2" data-stock="in-stock">
+        <img src="https://images.unsplash.com/photo-1589141986943-5578615fdef2?q=80&w=1200&auto=format&fit=crop" alt="Sunset Haze cannabis buds in natural light">
+        <div class="card-content">
+          <h3>Sunset Haze</h3>
+          <p>Bright sativa uplift with tropical fruit and creative clarity.</p>
+          <span class="tag">Sativa</span>
+          <span class="stock-label">In Stock</span>
+        </div>
+      </div>
+
+      <div class="card" data-type="hybrid" data-order="3" data-stock="in-stock">
+        <img src="https://images.unsplash.com/photo-1513465007688-22224402fcbe?q=80&w=1200&auto=format&fit=crop" alt="Garden Grove hybrid cannabis buds close-up">
+        <div class="card-content">
+          <h3>Garden Grove</h3>
+          <p>Balanced hybrid for daytime focus with smooth herbal sweetness.</p>
+          <span class="tag">Hybrid</span>
+          <span class="stock-label">In Stock</span>
+        </div>
+      </div>
+
+      <div class="card" data-type="indica" data-order="4" data-stock="in-stock">
+        <img src="https://images.unsplash.com/photo-1457573399415-1154bfe3ff71?q=80&w=1200&auto=format&fit=crop" alt="Mojave Melt indica bud beside a jar">
+        <div class="card-content">
+          <h3>Mojave Melt</h3>
+          <p>Soft indica melt with berry spice and rolling relaxation.</p>
+          <span class="tag">Indica</span>
+          <span class="stock-label">In Stock</span>
+        </div>
+      </div>
+
+      <div class="card" data-type="sativa" data-order="5" data-stock="in-stock">
+        <img src="https://images.unsplash.com/photo-1518469669531-9b8c528f909d?q=80&w=1200&auto=format&fit=crop" alt="Cactus Flower sativa buds on white textile">
+        <div class="card-content">
+          <h3>Cactus Flower</h3>
+          <p>Crisp sativa with citrus brightness, perfect for creative afternoons.</p>
+          <span class="tag">Sativa</span>
+          <span class="stock-label">In Stock</span>
+        </div>
+      </div>
+
+      <div class="card" data-type="hybrid" data-order="6" data-stock="in-stock">
+        <img src="https://images.unsplash.com/photo-1559558260-dfa522cfd57c?q=80&w=1200&auto=format&fit=crop" alt="Highland Haze hybrid cannabis buds with green leaves">
+        <div class="card-content">
+          <h3>Highland Haze</h3>
+          <p>Elevated hybrid with pine, pepper, and balanced lift.</p>
+          <span class="tag">Hybrid</span>
+          <span class="stock-label">In Stock</span>
+        </div>
+      </div>
+
+      <div class="card" data-type="indica" data-order="7" data-stock="in-stock">
+        <img src="https://images.unsplash.com/photo-1597266028999-5ee5dbb30b3c?q=80&w=1200&auto=format&fit=crop" alt="Sierra Dream indica bud close-up with soft lighting">
+        <div class="card-content">
+          <h3>Sierra Dream</h3>
+          <p>Deep indica for calm evenings and easy sleep prep.</p>
+          <span class="tag">Indica</span>
+          <span class="stock-label">In Stock</span>
+        </div>
+      </div>
+
+      <div class="card" data-type="sativa" data-order="8" data-stock="in-stock">
+        <img src="https://images.unsplash.com/photo-1518465444133-93542d08fdd9?q=80&w=1200&auto=format&fit=crop" alt="Mirage Mist sativa cannabis buds with green tones">
+        <div class="card-content">
+          <h3>Mirage Mist</h3>
+          <p>Airy sativa with a citrus haze finish and gentle mental lift.</p>
+          <span class="tag">Sativa</span>
+          <span class="stock-label">In Stock</span>
+        </div>
+      </div>
+
+      <div class="card" data-type="hybrid" data-order="9" data-stock="in-stock">
+        <img src="https://images.unsplash.com/photo-1634902349007-cfc9c61dff79?q=80&w=1200&auto=format&fit=crop" alt="Coral Reef hybrid bud dusted with frost">
+        <div class="card-content">
+          <h3>Coral Reef</h3>
+          <p>Ocean-inspired hybrid with tropical terpenes and mellow energy.</p>
+          <span class="tag">Hybrid</span>
+          <span class="stock-label">In Stock</span>
+        </div>
+      </div>
+
+      <div class="card" data-type="indica" data-order="10" data-stock="in-stock">
+        <img src="https://images.unsplash.com/photo-1602168431602-9bfa3722a472?q=80&w=1200&auto=format&fit=crop" alt="Midnight Reserve indica bud with rich amber hues">
+        <div class="card-content">
+          <h3>Midnight Reserve</h3>
+          <p>Rich indica reserve with chocolatey notes and a peaceful finish.</p>
+          <span class="tag">Indica</span>
+          <span class="stock-label">In Stock</span>
+        </div>
+      </div>
+
+      <div class="card" data-type="sativa" data-order="11" data-stock="in-stock">
+        <img src="https://images.unsplash.com/photo-1681329704138-baa1b51f32ff?q=80&w=1200&auto=format&fit=crop" alt="Sunrise Spark sativa cannabis bundle on a wooden surface">
+        <div class="card-content">
+          <h3>Sunrise Spark</h3>
+          <p>Vibrant sativa spark for energized mornings and light social vibes.</p>
+          <span class="tag">Sativa</span>
+          <span class="stock-label">In Stock</span>
+        </div>
+      </div>
+
+      <div class="card" data-type="hybrid" data-order="12" data-stock="in-stock">
+        <img src="https://images.unsplash.com/photo-1589140915708-20ff586fe767?q=80&w=1200&auto=format&fit=crop" alt="Pueblo Harmony hybrid buds on a bright surface">
+        <div class="card-content">
+          <h3>Pueblo Harmony</h3>
+          <p>Community blend with floral sweetness and balanced body calm.</p>
+          <span class="tag">Hybrid</span>
+          <span class="stock-label">In Stock</span>
+        </div>
+      </div>
+
+      <div class="card" data-type="indica" data-order="13" data-stock="in-stock">
+        <img src="https://images.unsplash.com/photo-1597266028999-5ee5dbb30b3c?q=80&w=1200&auto=format&fit=crop" alt="Twilight Kush indica bud close-up">
+        <div class="card-content">
+          <h3>Twilight Kush</h3>
+          <p>Quiet indica with herbal spice, great for unwinding after dark.</p>
+          <span class="tag">Indica</span>
+          <span class="stock-label">In Stock</span>
+        </div>
+      </div>
+
+      <div class="card" data-type="sativa" data-order="14" data-stock="in-stock">
+        <img src="https://images.unsplash.com/photo-1536964310528-e47dd655ecf3?q=80&w=1200&auto=format&fit=crop" alt="Lemon Drive sativa strain with green citrus notes">
+        <div class="card-content">
+          <h3>Lemon Drive</h3>
+          <p>Sharp sativa with lemon zest and bright, uplifting energy.</p>
+          <span class="tag">Sativa</span>
+          <span class="stock-label">In Stock</span>
+        </div>
+      </div>
+
+      <div class="card" data-type="hybrid" data-order="15" data-stock="in-stock">
+        <img src="https://images.unsplash.com/photo-1617101814633-c8a6cfd159cc?q=80&w=1200&auto=format&fit=crop" alt="Canyon Mist hybrid buds with earthy green highlights">
+        <div class="card-content">
+          <h3>Canyon Mist</h3>
+          <p>Light hybrid for calm focus, blending earth notes and sweet florals.</p>
+          <span class="tag">Hybrid</span>
+          <span class="stock-label">In Stock</span>
+        </div>
+      </div>
+
+      <div class="card" data-type="indica" data-order="16" data-stock="in-stock">
+        <img src="https://images.unsplash.com/photo-1629406979664-d930f76dc124?q=80&w=1200&auto=format&fit=crop" alt="Sagebrush Indica bud with sage-green tones">
+        <div class="card-content">
+          <h3>Sagebrush Indica</h3>
+          <p>Sedative indica with sage and cedar for a restorative evening.</p>
+          <span class="tag">Indica</span>
+          <span class="stock-label">In Stock</span>
+        </div>
+      </div>
+
+      <div class="card" data-type="sativa" data-order="17" data-stock="in-stock">
+        <img src="https://images.unsplash.com/photo-1661287137868-b750753edb3f?q=80&w=1200&auto=format&fit=crop" alt="Prairie Wind sativa plant with bright green leaves">
+        <div class="card-content">
+          <h3>Prairie Wind</h3>
+          <p>Clear sativa breeze with grassy citrus and steady daytime focus.</p>
+          <span class="tag">Sativa</span>
+          <span class="stock-label">In Stock</span>
+        </div>
+      </div>
+
+      <div class="card" data-type="hybrid" data-order="18" data-stock="in-stock">
+        <img src="https://images.unsplash.com/photo-1634902349007-cfc9c61dff79?q=80&w=1200&auto=format&fit=crop" alt="Golden Mesa hybrid buds close-up">
+        <div class="card-content">
+          <h3>Golden Mesa</h3>
+          <p>Warm hybrid with desert honey aromas and a smooth, balanced calm.</p>
+          <span class="tag">Hybrid</span>
+          <span class="stock-label">In Stock</span>
+        </div>
+      </div>
+
+      <div class="card" data-type="indica" data-order="19" data-stock="in-stock">
+        <img src="https://images.unsplash.com/photo-1503262028195-93c528f03218?q=80&w=1200&auto=format&fit=crop" alt="Evening Ember indica flower with deep tones">
+        <div class="card-content">
+          <h3>Evening Ember</h3>
+          <p>Quiet indica ember with spiced berry and deep relaxation.</p>
+          <span class="tag">Indica</span>
+          <span class="stock-label">In Stock</span>
+        </div>
+      </div>
+
+      <div class="card" data-type="sativa" data-order="20" data-stock="in-stock">
+        <img src="https://images.unsplash.com/photo-1605039828994-9ad00c0cc10c?q=80&w=1200&auto=format&fit=crop" alt="Trailblaze sativa buds resting on blue denim">
+        <div class="card-content">
+          <h3>Trailblaze</h3>
+          <p>Bold sativa for adventure with citrus fire and clear energy.</p>
+          <span class="tag">Sativa</span>
+          <span class="stock-label">In Stock</span>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- GALLERY -->
+
+  <section id="gallery">
+
+    <h2 class="section-title">Local Artist Gallery</h2>
+
+    <p class="section-sub artist-highlight">
+      Pueblo proudly features the original art of <strong>Armando Lerma</strong>, owner of Pueblo Cannabis Co. His desert-inspired paintings and mixed-media compositions bring a rich visual narrative to our shop walls.
+      More local artists will be added here over time, but this gallery currently highlights Armando’s signature works.
+    </p>
+
+    <div class="gallery-grid">
+      <figure>
+        <img src="PC1.webp" alt="Armando Lerma with his portrait artwork">
+        <figcaption>Armando Lerma — Creator and Visionary, standing with his evocative portrait work.</figcaption>
+      </figure>
+      <figure>
+        <img src="PC2.webp" alt="Monumental sculptural installations by Armando Lerma">
+        <figcaption>Armando Lerma — Desert Sentinels, towering installations that command the landscape.</figcaption>
+      </figure>
+      <figure>
+        <img src="PC3.webp" alt="Water tank mural featuring Armando's artistic vision">
+        <figcaption>Armando Lerma — Meditation & Movement, a transformative public art mural celebrating water and the desert spirit.</figcaption>
+      </figure>
+    </div>
+
+  </section>
+
+  <!-- ABOUT -->
+
+  <section id="about">
+
+    <div class="about">
+
+      <img src="IMG_8572.webp" alt="Pueblo Cannabis Co. logo">
+
+      <div class="about-text">
+        <h2 class="section-title">About Pueblo</h2>
+
+        <p>
+          Pueblo Cannabis Co. was founded to create a warm,
+          community-centered destination where cannabis,
+          art, and culture intersect.
+        </p>
+
+        <p>
+          Inspired by desert aesthetics and local creativity,
+          Pueblo gives independent artists and wellness-focused
+          cannabis consumers a place to connect.
+        </p>
+
+        <p>
+          Whether you're discovering a new strain,
+          attending an art opening, or supporting local creators,
+          Pueblo is built for the people of the community.
+        </p>
+
+        <a href="#footer" class="btn">Visit Us</a>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer id="footer">
+
+    <div class="footer-grid">
+
+      <div>
+        <h4>Pueblo Cannabis Co.</h4>
+        <p>
+          85591 Grapefruit Blvd Suite A<br>
+          Coachella, CA 92236<br>
+          Phone: <a href="tel:760-799-8623">760-799-8623</a>
+        </p>
+      </div>
+
+      <div>
+        <h4>Business Hours</h4>
+        <p>
+          Daily: 2PM - 10PM
+        </p>
+      </div>
+
+      <div>
+        <h4>Quick Links</h4>
+        <p><a href="#shop">Shop</a></p>
+        <p><a href="#gallery">Gallery</a></p>
+        <p><a href="#about">About</a></p>
+      </div>
+
+      <div>
+        <h4>Follow Pueblo</h4>
+
+        <div class="socials">
+          <a href="https://www.instagram.com/pueblocannabis/" target="_blank">IG</a>
+          <a href="https://x.com/PuebloCannabis" target="_blank">X</a>
+        </div>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+  <script>
+
+    // AGE VERIFICATION
+
+    function enterSite(){
+      localStorage.setItem("puebloAgeVerified", "true");
+      document.getElementById("agePopup").style.display = "none";
+    }
+
+    function leaveSite(){
+      window.location.href = "https://www.google.com";
+    }
+
+    function updateInventory(){
+      const query = document.getElementById("productSearch").value.toLowerCase();
+      const activeFilter = document.querySelector(".filter-btn.active").dataset.filter;
+      document.querySelectorAll(".products .card").forEach(card => {
+        const type = card.dataset.type;
+        const title = card.querySelector("h3").textContent.toLowerCase();
+        const description = card.querySelector("p").textContent.toLowerCase();
+        const matchesText = query === "" || title.includes(query) || description.includes(query) || type.includes(query);
+        const matchesFilter = activeFilter === "all" || type === activeFilter;
+        card.style.display = matchesText && matchesFilter ? "block" : "none";
+      });
+    }
+
+    function setFilter(filter){
+      document.querySelectorAll(".filter-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.filter === filter);
+      });
+      updateInventory();
+    }
+
+    function sortInventory(){
+      const container = document.querySelector('.products');
+      const sortBy = document.getElementById('sortSelect').value;
+      const cards = Array.from(container.querySelectorAll('.card'));
+
+      cards.sort((a,b) => {
+        if(sortBy === 'name'){
+          return a.querySelector('h3').textContent.localeCompare(b.querySelector('h3').textContent);
+        }
+        if(sortBy === 'type'){
+          return a.dataset.type.localeCompare(b.dataset.type);
+        }
+        return Number(a.dataset.order) - Number(b.dataset.order);
+      });
+
+      cards.forEach(card => container.appendChild(card));
+    }
+
+    window.onload = function(){
+      const verified = localStorage.getItem("puebloAgeVerified");
+
+      if(verified === "true"){
+        document.getElementById("agePopup").style.display = "none";
+      }
+
+      const searchField = document.getElementById("productSearch");
+      if(searchField){
+        searchField.addEventListener("input", updateInventory);
+      }
+
+      document.querySelectorAll(".filter-btn").forEach(btn => {
+        btn.addEventListener("click", () => setFilter(btn.dataset.filter));
+      });
+
+      const sortSelect = document.getElementById('sortSelect');
+      if(sortSelect){
+        sortSelect.addEventListener('change', () => {
+          sortInventory();
+          updateInventory();
+        });
+      }
+    }
+
+  </script>
+
+</body>
+</html>
